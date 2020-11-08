@@ -58,46 +58,72 @@ var score = 0;
 var currentQuestion = -1
 var timeLeft = 0
 var timer;
+var highscore = 0;
 
 
 
 
 
 
-var timeLeft = 75;
+//click "Let's Go" buttom timer will start
+timeLeft = 60;
 document.getElementById("timeLeft").innerHTML = timeLeft;
-    
-    var timerId = setInterval(countdown, 1000);
-    
-    function countdown() {
-      if (timeLeft == -1) {
-        clearTimeout(timerId);
-        doSomething();
-      } else {
-        elem.innerHTML = timeLeft + ' seconds remaining';
-        timeLeft--;
-      }
+
+timer = setInterval(function() {
+    timeLeft--;
+    document.getElementById("timeLeft").innerHTML = timeLeft;
+     //game will end if timer is below zero
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        endGame(); 
     }
-    document.getElementById('incorrect').addEventListener('click', function(){
-        sec -=3;
-        document.getElementById("timeLeft").innerHTML = timeLeft;
-    });
+}, 1000);
 
-for (var i = 0; i < questionArray.length; i++){
-    var userAnswer = confirm(questionArray[i].question);
+next();
 
-    //Check the user's answer against the correct answer
-    if (userAnswer === answerArray[i]){
-    ///  Increment the score accordingly
-                score++;
-                alert("Correct!");
-            } else {
-                alert("Wrong!");
-            }
+
+
+
+
+
+
+//answered incorrectly time go down
+function incorrect() {
+    timeLeft -= 5; 
+    next();
+}
+
+//answerd correctly time goes up 
+function correct() {
+    score += 10;
+    next();
+}
+
+
+
+  
+
+    function next() {
+        currentQuestion++;
+    
+        if (currentQuestion > questionArray.length - 1) {
+            endGame();
+            return;
         }
     
+        var testContent = "<h1>" + questionArray[currentQuestion].question + "</h1>"
+    
+        for (var buttonLoop = 0; buttonLoop < questionArray[currentQuestion].choices.length; buttonLoop++) {
+            var buttonCode = "<button onclick=\"[ANS]\">[CHOICE]</button>"; 
+            buttonCode = buttonCode.replace("[CHOICE]", questionArray[currentQuestion].choices[buttonLoop]);
+            if (questionArray[currentQuestion].choices[buttonLoop] == questionArray[currentQuestion].answer) {
+                buttonCode = buttonCode.replace("[ANS]", "correct()");
+            } else {
+                buttonCode = buttonCode.replace("[ANS]", "incorrect()");
+            }
+            testContent += buttonCode
+        }
 
-        //alert the user with the final score
-        alert('You got ' + score + '/' + questionArray.length);
+document.getElementById("testBody").innerHTML = testContent;
 
-document.getElementById("timeLeft").innerHTML = timeLeft;
+}
