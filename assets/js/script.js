@@ -54,27 +54,41 @@ var questionArray = [
 ]
 
 
-//var timmer
-var timer= -1;
-
-
-
-
-var count= 75;
-
-document.getElementById('count)').innerHTML=count;
-count--;
-
-
-// keep track of score
 var score = 0;
+var currentQuestion = -1
+var timeLeft = 0
+var timer;
 
-for (var i = 0; i < questionsArray.length; i++){
-    var userAnswer = confirm(questionsArray[i].question);
 
-    // TODO: Check the user's answer against the correct answer
+
+
+
+
+var timeLeft = 75;
+document.getElementById("timeLeft").innerHTML = timeLeft;
+    
+    var timerId = setInterval(countdown, 1000);
+    
+    function countdown() {
+      if (timeLeft == -1) {
+        clearTimeout(timerId);
+        doSomething();
+      } else {
+        elem.innerHTML = timeLeft + ' seconds remaining';
+        timeLeft--;
+      }
+    }
+    document.getElementById('incorrect').addEventListener('click', function(){
+        sec -=3;
+        document.getElementById("timeLeft").innerHTML = timeLeft;
+    });
+
+for (var i = 0; i < questionArray.length; i++){
+    var userAnswer = confirm(questionArray[i].question);
+
+    //Check the user's answer against the correct answer
     if (userAnswer === answerArray[i]){
-        // TODO: Alert the user if they are correct or wrong. Increment the score accordingly
+    ///  Increment the score accordingly
                 score++;
                 alert("Correct!");
             } else {
@@ -84,4 +98,6 @@ for (var i = 0; i < questionsArray.length; i++){
     
 
         //alert the user with the final score
-alert("Finished! Your score was " + score + " out of " + questionsArray.length);
+        alert('You got ' + score + '/' + questionArray.length);
+
+document.getElementById("timeLeft").innerHTML = timeLeft;

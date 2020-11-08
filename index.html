@@ -5,17 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>NBA Questions</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./assets/js/script.js"></script>
   </head>
 
   <body>
-    <div id= "score">
+    <nav>
+        <div class="upleft">
+    <a onclick="scores" href="#"><h4> View HighScore</h4></a>
+        </div>
+    
+    <div class="upright">
+        <h4>Timer: <span id="timeLeft">0</span></h4>
+    </div>
+    </nav>
 
 
-        <h3> Click to Start
+<header>
 
-        </h3>
-        <button onclick="start()">Start!</button>
-    </div> 
-    <script src="./assets/js/script.js"></script>
+<!--- Main body of quiz-->
+<div id= "Quiz">
+<div class="quizSection" >
+    <h1 class="page-title">NBA Quiz Challenge</h1>
+    <h2>Answer the question following questions within the time limit</h2>
+            <h3> 
+                Click to Start
+            </h3>
+
+            <button id="showQuiz">Let's GO!!!</button>
+        </div> 
+</div>
+</header>
+
+
+
+
+    
+
   </body>
 </html>
