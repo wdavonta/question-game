@@ -10,7 +10,7 @@ var questionArray = [
     "4",
     "6"
     ],
-    answer: "4"
+    answer: "6"
 },
 {
 
@@ -50,15 +50,27 @@ var questionArray = [
     "October 5th, 1991",
     ],
     answer: "June 6th, 1946"
+},
+{
+    question: "Who is the NBA Commissioner?",
+    choices:[
+
+    "Adam Silver",
+    "David Stern",
+    "Roger Goodell",
+    "John Spears",
+    ],
+    answer: "Adam Silver"
+
 }
 ]
 
 
 var score = 0;
-var currentQuestion = -1
-var timeLeft = 0
+var currentQuestion = -1;
+var timeLeft = 0;
 var timer;
-var highscore = 0;
+
 
 
 
@@ -66,6 +78,7 @@ var highscore = 0;
 
 
 //click "Let's Go" buttom timer will start
+function showQuiz () {
 timeLeft = 60;
 document.getElementById("timeLeft").innerHTML = timeLeft;
 
@@ -80,6 +93,25 @@ timer = setInterval(function() {
 }, 1000);
 
 next();
+}
+
+
+
+
+
+function endGame() {
+    var testContent=
+    score;
+
+userName = prompt("Please Enter Initials")
+localStarage.setItem("Name", userName);
+
+if ((userName = "")) {
+    alert("Please enter your Initials");
+    document.getElementById("testBody").innerHTML = testContent;
+}
+}
+
 
 
 
@@ -89,13 +121,13 @@ next();
 
 //answered incorrectly time go down
 function incorrect() {
-    timeLeft -= 5; 
+    timeLeft -= 20; 
     next();
 }
 
 //answerd correctly time goes up 
 function correct() {
-    score += 10;
+    score += 20;
     next();
 }
 
@@ -107,7 +139,7 @@ function correct() {
         currentQuestion++;
     
         if (currentQuestion > questionArray.length - 1) {
-            endGame();
+            //endGame();
             return;
         }
     
